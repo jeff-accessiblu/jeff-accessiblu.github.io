@@ -1,0 +1,445 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta property="og:title" content="Jeff Rodgers: Accessibility Conformance Report"><meta property="og:description" content="Jeff Rodgers’ resume, written as a VPAT-style Accessibility Conformance Report."><meta name="author" content="Jeff Rodgers">
+<title>Jeff Rodgers Conformance Report</title>
+<meta name="description" content="Jeff Rodgers' resume, written as an Accessibility Conformance Report against GitHub's Senior Accessibility Program Manager posting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;600&family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,800;1,400&display=swap">
+<style>
+/* Layout: a VPAT-style conformance report. Metadata block, a summary meter, then criteria tables with a Remarks column that cite evidence. */
+:root {
+  --bg: #fbfbfd;
+  --surface: #ffffff;
+  --ink: #0b1230;
+  --muted: #4a5170;
+  --rule: #d9dcea;
+  --navy: #000b5e;
+  --cobalt: #0049db;
+  --orange: #f18b43;
+  --orange-text: #a3480a;
+  --supports: #126b3a;
+  --supports-bg: #e5f4ea;
+  --partial: #8a4b00;
+  --partial-bg: #fdf0df;
+  --focus: #0049db;
+  --font-display: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, sans-serif;
+  --font-body: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, sans-serif;
+  --font-mono: "Atkinson Hyperlegible Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0f24; --surface: #121735; --ink: #eef0f8; --muted: #b5bad3; --rule: #2a3160;
+    --navy: #1b2a8f; --cobalt: #8fb0ff; --orange: #f5a36a; --orange-text: #f5a36a;
+    --supports: #7fdca2; --supports-bg: #12321f; --partial: #ffc37a; --partial-bg: #3a2a12; --focus: #f5a36a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b0f24; --surface: #121735; --ink: #eef0f8; --muted: #b5bad3; --rule: #2a3160;
+  --navy: #1b2a8f; --cobalt: #8fb0ff; --orange: #f5a36a; --orange-text: #f5a36a;
+  --supports: #7fdca2; --supports-bg: #12321f; --partial: #ffc37a; --partial-bg: #3a2a12; --focus: #f5a36a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6;
+}
+a { color: var(--cobalt); text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+.skip { position: absolute; left: 12px; top: -100px; background: var(--navy); color: #fff; padding: 10px 16px; z-index: 20; border-radius: 0 0 6px 6px; }
+.skip:focus { top: 0; outline: 3px solid #f18b43; }
+
+.masthead { background: #000b5e; color: #fff; }
+.masthead .inner, main .inner, footer .inner {
+  max-width: 1040px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.masthead .inner { padding-block: 40px 32px; display: grid; gap: 14px; }
+.eyebrow { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; color: #ffd2b0; margin: 0; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.25rem, 6vw, 3.6rem); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.lede { font-size: 1.1875rem; max-width: 62ch; margin: 0; color: #e3e6f7; }
+.masthead a { color: #ffffff; }
+.contact { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.9375rem; margin: 6px 0 0; padding: 0; list-style: none; color: #e3e6f7; }
+
+main .inner { padding-block: 32px 48px; display: grid; gap: 40px; }
+main .inner > * { min-width: 0; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; line-height: 1.2; margin: 0 0 6px; color: var(--ink); text-wrap: balance; }
+h2 .num { font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; color: var(--muted); display: block; letter-spacing: 0.04em; margin-bottom: 2px; }
+.section-note { color: var(--muted); margin: 0 0 14px; max-width: 70ch; }
+
+/* Report metadata, like the first page of an ACR */
+.meta { display: grid; grid-template-columns: minmax(150px, 220px) 1fr; border-top: 2px solid var(--ink); margin: 0; }
+.meta dt, .meta dd { padding: 12px 0; border-bottom: 1px solid var(--rule); margin: 0; min-width: 0; }
+.meta dt { font-family: var(--font-mono); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); padding-right: 16px; padding-top: 15px; }
+.meta dd p { margin: 0 0 6px; }
+.meta dd p:last-child { margin: 0; }
+
+/* Summary meter */
+.summary { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; }
+.tally { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0; padding: 0; list-style: none; }
+.tally li { display: flex; align-items: baseline; gap: 8px; }
+.tally strong { font-family: var(--font-display); font-weight: 800; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1; }
+.bar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: var(--rule); }
+.bar span { display: block; }
+.bar .s { background: var(--supports); }
+.bar .p { background: repeating-linear-gradient(135deg, var(--partial) 0 6px, var(--partial-bg) 6px 9px); }
+.summary p { margin: 0; color: var(--muted); max-width: 72ch; }
+
+/* Conformance tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+caption { text-align: left; padding: 14px 16px 10px; font-weight: 600; color: var(--ink); }
+caption span { display: block; font-weight: 400; color: var(--muted); font-size: 0.9375rem; }
+th, td { text-align: left; vertical-align: top; padding: 14px 16px; border-top: 1px solid var(--rule); }
+thead th { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; background: var(--bg); }
+tbody th { font-weight: 600; width: 32%; }
+tbody th .ref { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 0.75rem; color: var(--muted); margin-bottom: 2px; letter-spacing: 0.03em; }
+td.level { width: 16%; white-space: nowrap; }
+td.remarks p { margin: 0 0 8px; }
+td.remarks p:last-child { margin: 0; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 0.875rem; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 999px; }
+.chip svg { width: 14px; height: 14px; flex: none; }
+.chip.s { color: var(--supports); background: var(--supports-bg); }
+.chip.p { color: var(--partial); background: var(--partial-bg); }
+.evidence { font-size: 0.875rem; color: var(--muted); }
+
+/* Roadmap */
+.roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.roadmap li { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 18px; min-width: 0; }
+.roadmap h3 { margin: 0 0 4px; font-size: 1.0625rem; }
+.roadmap .when { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--orange-text); font-weight: 600; margin: 0 0 6px; }
+.roadmap p { margin: 0; }
+
+.prose p { margin: 0 0 10px; max-width: 70ch; }
+.prose p:last-child { margin: 0; }
+.methods { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.terms { display: grid; grid-template-columns: minmax(140px, 190px) 1fr; margin: 0; border-top: 2px solid var(--ink); }
+.terms dt, .terms dd { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
+.terms dt { font-weight: 600; padding-right: 16px; }
+td.lvl { font-family: var(--font-mono); font-weight: 600; white-space: nowrap; width: 6%; }
+td.n { font-family: var(--font-display); font-weight: 800; font-variant-numeric: tabular-nums; width: 10%; }
+.summary .table-wrap { background: var(--bg); }
+.disclaimer { border-left: 4px solid var(--orange); padding: 4px 0 4px 16px; color: var(--muted); max-width: 72ch; margin: 0; }
+footer { border-top: 1px solid var(--rule); }
+footer .inner { padding-block: 20px 32px; color: var(--muted); font-size: 0.875rem; }
+
+@media (max-width: 560px) {
+  .meta, .terms { grid-template-columns: 1fr; }
+  .terms dt { padding-bottom: 0; border-bottom: 0; }
+  .meta dt { padding-bottom: 0; border-bottom: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bar span { transition: flex-grow .6s ease; }
+}
+@media print {
+  body { font-size: 9.5pt; line-height: 1.45; }
+  .masthead .inner { padding-block: 18px 16px; gap: 8px; }
+  h1 { font-size: 26pt; }
+  .lede { font-size: 11pt; }
+  h2 { font-size: 14pt; }
+  main .inner { padding-block: 16px 16px; }
+  .meta dt, .meta dd { padding: 6px 0; }
+  .meta dt { padding-top: 8px; }
+  th, td { padding: 7px 10px; }
+  caption { padding: 8px 10px 6px; }
+  .summary { padding: 12px; gap: 8px; }
+  .tally strong { font-size: 18pt; }
+  .roadmap li { padding: 12px; }
+  .skip { display: none; }
+  .masthead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .table-wrap { overflow: visible; border: 0; }
+  table { min-width: 0; }
+  tr, .roadmap li, .summary { break-inside: avoid; }
+  h2, caption, thead { break-after: avoid; }
+  section[aria-labelledby="h-t1"] { break-before: page; }
+  .table-wrap { break-before: avoid; }
+  main .inner { gap: 18px; }
+}
+</style>
+</head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-s" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.6 8.3l2.2 2.2 4.6-4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-p" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 0.75a7.25 7.25 0 0 1 0 14.5z" fill="currentColor"/></symbol>
+</svg>
+
+<a class="skip" href="#report">Skip to the report</a>
+
+<header class="masthead">
+  <div class="inner">
+    <p class="eyebrow">Voluntary Product Accessibility Template (VPAT®) style · Job Posting Edition · Conformance Report</p>
+    <h1>Jeff Rodgers, MS Ed</h1>
+    <p class="lede">Candidate for Senior Accessibility Program Manager at GitHub. Owner of Accessiblü Solutions, who writes VPATs for a living and builds the testing tools that make them faster.</p>
+    <ul class="contact" aria-label="Contact">
+      <li>jeff@greatlakesai.solutions</li>
+      <li>330-418-5011</li>
+      <li><a href="https://www.linkedin.com/in/jroda11y">LinkedIn: jroda11y</a></li>
+      <li><a href="https://github.com/jeff-accessiblu">GitHub: jeff-accessiblu</a></li>
+      <li>Hartville, Ohio (Remote)</li>
+    </ul>
+  </div>
+</header>
+
+<main id="report" tabindex="-1">
+  <div class="inner">
+
+    <section aria-labelledby="h-meta">
+      <h2 id="h-meta">Report information</h2>
+      <dl class="meta">
+        <dt>Name of product / version</dt>
+        <dd><p>Jeff Rodgers, version 1997. Continuously updated since the Marine Corps, with major releases at tenure (2015), Accessiblü (2021) and ownership (2026).</p></dd>
+        <dt>Product description</dt>
+        <dd><p>An accessibility program leader who has spent five years running WCAG and Section 508 programs from the vendor side, first as Accessiblü's operational lead and now as its owner. Ships his own AI-assisted testing tools. Previously led accessibility for Cuyahoga Community College and chaired an academic department.</p></dd>
+        <dt>Contact information</dt>
+        <dd><p>For questions about the timeline for improvements or the general accessibility of this candidate, contact jeff@greatlakesai.solutions or 330-418-5011.</p></dd>
+        <dt>Report date</dt>
+        <dd><p>November 2026 (first edition)</p></dd>
+        <dt>Report author</dt>
+        <dd><p>Jeff Rodgers. Yes, the product wrote its own report. See the legal disclaimer.</p></dd>
+        <dt>Notes</dt>
+        <dd><p>Prepared for GitHub's Senior Accessibility Program Manager posting. Ratings reflect work completed through November 2026. Client outcomes come from conformance reports I authored, and references are available on request.</p></dd>
+      </dl>
+    </section>
+
+    <section aria-labelledby="h-progress">
+      <h2 id="h-progress">Progress statement</h2>
+      <div class="prose">
+        <p>This report covers 29 years of continuous development. The Marine Corps installed the discipline. Eight years as a professor and department chair added teaching, budgets and the patience to run a committee. Tri-C is where accessibility became the job, with a million course materials and four campuses to bring along.</p>
+        <p>Since 2021 the work has run from the vendor side. At Accessiblü I've embedded with product and engineering teams, written the VPATs, briefed executives and city councils, and in July 2026 took over the business. Around that work I've built tooling with AI, so audits that used to take days of spreadsheet work now start from an inventory and a guided checklist.</p>
+        <p>The open items in this report are isolated to one area, experience as an employee inside a large matrixed organization, and each carries a documented plan in the roadmap.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-methods">
+      <h2 id="h-methods">Evaluation methods used</h2>
+      <ul class="methods">
+        <li>Line-by-line review of GitHub's posting, with each requirement treated as a success criterion</li>
+        <li>Public code review: the <a href="https://github.com/Accessiblu/checku-a11y-tester">Ü Check repository</a> and its changelog</li>
+        <li>Client outcomes taken from conformance reports I authored</li>
+        <li>Employment history and references, available on request</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="h-standards">
+      <h2 id="h-standards">Applicable standards and guidelines</h2>
+      <p class="section-note">This report covers the degree of conformance with the following sections of GitHub's posting.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Applicable standards table">
+        <table>
+          <caption>Standards included in this report<span>Required qualifications are rated as Level A, preferred as Level AA, and extras as Level AAA</span></caption>
+          <thead><tr><th scope="col">Standard / guideline</th><th scope="col">Included in report</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Successful candidate profile (Overview)</th><td>Yes</td></tr>
+            <tr><th scope="row">Qualifications</th><td>Level A (required): Yes. Level AA (preferred): Yes.</td></tr>
+            <tr><th scope="row">Initial focus areas (Responsibilities)</th><td>Yes</td></tr>
+            <tr><th scope="row">Business leadership beyond the posting</th><td>Level AAA: Yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-terms">
+      <h2 id="h-terms">Terms</h2>
+      <dl class="terms">
+        <dt>Supports</dt><dd>Meets the criterion without known defects. Evidence is cited in the remarks.</dd>
+        <dt>Partially Supports</dt><dd>Some of the criterion is not met. The remarks say which part, and the roadmap shows when it gets closed.</dd>
+        <dt>Does Not Support</dt><dd>The majority of the criterion is not met. None reported.</dd>
+        <dt>Not Applicable</dt><dd>The criterion is not relevant to this candidate. None reported.</dd>
+        <dt>Not Evaluated</dt><dd>Only allowed for Level AAA criteria in a real ACR. Every criterion here was evaluated.</dd>
+      </dl>
+    </section>
+
+    <section aria-labelledby="h-summary" class="summary">
+      <h2 id="h-summary">Conformance summary</h2>
+      <ul class="tally">
+        <li><strong>15</strong> <span>Supports</span></li>
+        <li><strong>2</strong> <span>Partially Supports</span></li>
+        <li><strong>0</strong> <span>Does Not Support</span></li>
+      </ul>
+      <div class="bar" role="img" aria-label="17 criteria: 15 Supports, 2 Partially Supports, 0 Does Not Support">
+        <span class="s" style="flex-grow:15"></span><span class="p" style="flex-grow:2"></span>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Conformance summary table">
+        <table>
+          <caption>Summary of conformance levels<span>17 criteria evaluated</span></caption>
+          <thead><tr><th scope="col">Conformance level</th><th scope="col"># Criteria</th><th scope="col">Description</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Supports</th><td class="n">15</td><td>No gaps found. Evidence cited for each.</td></tr>
+            <tr><th scope="row">Partially Supports</th><td class="n">2</td><td>Criteria 1.4 and 2.2, both about time as an employee inside a large organization. Remediation scheduled in the roadmap.</td></tr>
+            <tr><th scope="row">Does Not Support</th><td class="n">0</td><td>None.</td></tr>
+            <tr><th scope="row">Not Applicable</th><td class="n">0</td><td>None.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The two partials share one cause. My last five years were spent inside client organizations as a vendor rather than as an employee of a large one. That is also why I know how Enterprise accessibility programs get stuck.</p>
+    </section>
+
+    <section aria-labelledby="h-t1">
+      <h2 id="h-t1"><span class="num">Table 1</span>The successful candidate</h2>
+      <p class="section-note">The five traits the posting says the right person will have.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Table 1, successful candidate">
+        <table>
+          <caption>Successful candidate criteria<span>From the Overview section of the posting</span></caption>
+          <thead><tr><th scope="col">Criteria</th><th scope="col">Conformance level</th><th scope="col">Remarks and explanations</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="ref">1.1</span>Deep understanding of accessibility, assistive technology and how people with disabilities use technology</th>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Five years leading manual and automated audits with JAWS, NVDA, VoiceOver, TalkBack and Narrator across web apps, iOS apps, LMS platforms and physical kiosks. My audit teams include testers who use assistive technology every day.</p><p class="evidence">DHS Section 508 Trusted Tester. Section 508 Standards for Web certification.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">1.2</span>Technical expertise grounded in professional experience as a software developer or designer</th>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Professional instructional and media designer from 2016 to 2021. Built Ü Check (plain JavaScript, Chrome Manifest V3), the Ü Monitor audit platform and five production websites. Code-level remediation in HTML, CSS, ARIA and Shopify Liquid.</p><p class="evidence">Evidence: <a href="https://github.com/Accessiblu/checku-a11y-tester">Ü Check source on GitHub</a></p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">1.3</span>Hands-on experience using AI and automation to improve accessibility at scale</th>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Ü Check releases 1.8 through 1.16 shipped in six days with Claude as my coding partner, adding a guided audit, element inventory, per-criterion counts, and focus indicator and live region checks. AI-supported VPAT workflows cut documentation time by more than 60%. Piloting AI-assisted PDF remediation with a development partner.</p><p class="evidence">Evidence: <a href="https://github.com/Accessiblu/checku-a11y-tester/blob/main/CHANGELOG.md">Ü Check changelog</a></p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">1.4</span>Professional experience managing accessibility initiatives within a large matrixed organization</th>
+              <td class="level"><span class="chip p"><svg aria-hidden="true"><use href="#i-p"/></svg>Partially Supports</span></td>
+              <td class="remarks"><p>Supported: at Cuyahoga Community College I owned accessibility for roughly a million course materials across four campuses and 20,000+ students, working through college-wide committees, the COVID-19 continuity team and divisions across all four campuses. Conformance went from 65% to 80%.</p><p>Partial: that role ran two years. Since 2021 I've driven programs inside client organizations as their vendor, such as embedding with Sprout Social's engineering and product teams, rather than as an employee.</p><p class="evidence">Remediation scheduled: first 30 days. See Roadmap.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">1.5</span>Proven track record of results that empower people with disabilities to use technology</th>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Embedded with Sprout Social while their teams resolved about 600 accessibility issues. Under the stricter WCAG 2.2, their current report rates 46 of 52 applicable criteria “Supports,” compared with a prior vendor’s WCAG 2.1 report that listed 12 “Partially Supports” and 2 “Does Not Support.” Built ADA Title II programs for county governments ahead of the April 2026 DOJ deadline. Raised Tri-C's course material conformance from 65% to 80%.</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-t2">
+      <h2 id="h-t2"><span class="num">Table 2</span>Qualifications</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Table 2, qualifications">
+        <table>
+          <caption>Required and preferred qualifications<span>From the Qualifications section of the posting. Required is Level A, preferred is Level AA.</span></caption>
+          <thead><tr><th scope="col">Criteria</th><th scope="col">Level</th><th scope="col">Conformance level</th><th scope="col">Remarks and explanations</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="ref">2.1</span>Master's degree and 3+ years in accessibility engineering and design, or 7+ years without</th>
+              <td class="lvl">A</td>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>M.S. Ed. in Learning Design and Technology (Purdue) and M.S. in Music Technology (IUPUI). Ten years of accessibility work since 2016, five of them full time in a dedicated accessibility firm.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">2.2</span>3+ years driving programs across organizational boundaries in a large organization</th>
+              <td class="lvl">A</td>
+              <td class="level"><span class="chip p"><svg aria-hidden="true"><use href="#i-p"/></svg>Partially Supports</span></td>
+              <td class="remarks"><p>Two years of college-wide accessibility work at Tri-C and six years as department chair at the University of Saint Francis, where I led the program build-out and a $20 million facility renovation. Same root cause as 1.4.</p><p class="evidence">Remediation scheduled: first 30 days. See Roadmap.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">2.3</span>3+ years evaluating web content against WCAG</th>
+              <td class="lvl">A</td>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Ten years, from WCAG 2.0 at Lakeland Community College to WCAG 2.2 today. Author of VPAT 2.4 and 2.5 ACRs for SaaS, edtech, fintech, hardware and government clients.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">2.4</span>1+ years hands-on with AI and automation to improve accessibility at scale</th>
+              <td class="lvl">A</td>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Since 2025: AI-supported VPAT workflows, automated client compliance reporting in Python, AI-assisted PDF remediation, and Ü Check. Also founded Great Lakes AI Solutions, which grew from 6 to 21 clients in its first year.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">2.5</span>Developing accessible web interfaces with JavaScript and modern web technologies</th>
+              <td class="lvl">AA</td>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Ü Check's popup, Guided Audit and on-page highlighting are hand-built JavaScript with keyboard and screen reader support, and the Ü Monitor portal targets WCAG 2.2 AAA.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">2.6</span>Collecting and interpreting data for performance metrics and compliance</th>
+              <td class="lvl">AA</td>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Designed Ü Check's per-criterion counts (“17 of 20 elements pass”) so teams pick conformance levels from real numbers. Run monthly compliance reporting for client programs. Kirkpatrick evaluations of training at Tri-C.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">2.7</span>Product road mapping with product and engineering teams</th>
+              <td class="lvl">AA</td>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Worked accessibility fixes into the roadmaps of eight SaaS and edtech product teams, including Sprout Social. Own the roadmap for Ü Check and Ü Monitor.</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-t3">
+      <h2 id="h-t3"><span class="num">Table 3</span>Initial focus areas</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Table 3, initial focus areas">
+        <table>
+          <caption>Where the role starts<span>From the Responsibilities section of the posting</span></caption>
+          <thead><tr><th scope="col">Criteria</th><th scope="col">Conformance level</th><th scope="col">Remarks and explanations</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="ref">3.1</span>Manage listening systems, including inclusive user research and feedback processes</th>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Survey design and user research training from my learning design master's, put to work at Tri-C, where I led the Achieving the Dream research team on adaptive learning. Test plans built around testers who use assistive technology daily.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">3.2</span>Build an accessibility community of practice within GitHub's Enterprise customer community</th>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Founded the Great Lakes AI Network, a 50+ member practitioner community. Have trained county governments, bar association members and library consortiums. Companies like GitHub's Enterprise customers hire my firm when their programs stall, so I know where they stall.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">3.3</span>Grow the open-source GitHub accessibility scanner and its adoption</th>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>I build the same category of tool. Ü Check's focus indicator and live region checks cover gaps axe-core can't see in a snapshot, which makes them natural candidates for the scanner's plugin system.</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-t4">
+      <h2 id="h-t4"><span class="num">Table 4</span>Beyond the posting</h2>
+      <p class="section-note">Business leadership the posting doesn't ask for but the work will use.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Table 4, beyond the posting">
+        <table>
+          <caption>Business and leadership<span>Supplemental criteria, rated as Level AAA</span></caption>
+          <thead><tr><th scope="col">Criteria</th><th scope="col">Level</th><th scope="col">Conformance level</th><th scope="col">Remarks and explanations</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="ref">4.1</span>Owns outcomes and the numbers behind them</th>
+              <td class="lvl">AAA</td>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Owner and CEO of Accessiblü Solutions: sales, contracts, delivery and the P&amp;L. Founded two AI businesses in 2025.</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="ref">4.2</span>Explains accessibility to executives, lawyers and city councils</th>
+              <td class="lvl">AAA</td>
+              <td class="level"><span class="chip s"><svg aria-hidden="true"><use href="#i-s"/></svg>Supports</span></td>
+              <td class="remarks"><p>Executive and council briefings on Title II risk. Court documentation support for counsel in an active ADA complaint. Pennsylvania Bar Association webinar on AI, accessibility and legal technology.</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-road">
+      <h2 id="h-road">Roadmap</h2>
+      <p class="section-note">ACRs list known gaps with a plan. Here's mine, mapped to the role's first year.</p>
+      <ul class="roadmap">
+        <li><p class="when">First 30 days</p><h3>Learn the matrix</h3><p>Meet the owners of Primer, the Fundamentals scorecards and the accessibility champions network. Map how an accessibility issue moves from report to fix today.</p></li>
+        <li><p class="when">First 90 days</p><h3>Open the listening channels</h3><p>Stand up a regular feedback loop with developers with disabilities and the Enterprise Accessibility Advisory Panel, and publish what we heard and what changed.</p></li>
+        <li><p class="when">First year</p><h3>Grow the scanner</h3><p>Ship scanner plugins for checks axe-core can't make from a snapshot, starting with focus visibility, and help Enterprise customers wire the scanner into their pipelines.</p></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="h-legal">
+      <h2 id="h-legal">Legal disclaimer</h2>
+      <p class="disclaimer">This report is an interpretation of GitHub's posting provided by the candidate. Findings reflect the candidate as evaluated in November 2026 and do not guarantee performance under all conditions or in every meeting. This report is not a legal opinion or a certification. It was prepared by the product being evaluated, so independent verification is encouraged: the code is public, client outcomes are documented and references are available on request. VPAT is a registered trademark of the Information Technology Industry Council (ITI).</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="inner">Jeff Rodgers, MS Ed · Hartville, Ohio · Marine Corps veteran · Built to WCAG 2.2 AA and checked with axe-core before publishing.</div>
+</footer>
+</body></html>
